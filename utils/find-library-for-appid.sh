@@ -13,6 +13,7 @@ steam_install_candidates=( \
 	"$steam_dir" \
 	"$HOME/.var/app/com.valvesoftware.Steam/.local/share/Steam" \
 )
+steam_libraries=()
 for steam_install in "${steam_install_candidates[@]}"; do
 	echo "Searching for Steam in '$steam_install'" >&2
 	if [ -d "$steam_install" ]; then
@@ -25,7 +26,7 @@ for steam_install in "${steam_install_candidates[@]}"; do
 				main_library="$steam_install/steam"
 			fi
 
-			steam_libraries=("$main_library")
+			steam_libraries+=("$main_library")
 			steam_libraries+=($( \
 				grep -oE '/[^"]+' "$main_library/steamapps/libraryfolders.vdf" \
 			))
